@@ -1,4 +1,4 @@
-#include "minitalk.h"
+#include "../inc/minitalk.h"
 
 void	error_msg_pid(void)
 {

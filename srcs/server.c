@@ -1,4 +1,4 @@
-#include "minitalk.h"
+#include "../inc/minitalk.h"
 
 void	assemble_char(int sig)
 {
