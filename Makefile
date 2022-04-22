@@ -2,18 +2,8 @@ CC = cc
 CFLAGS = -Wall -Werror -Wextra
 RM = rm -rf
 
---------------------------------
-
 SERVER_NAME = server
 CLIENT_NAME = client
-
-CC = cc
-CFLAGS = -Wall -Wextra -Werror
-RM = rm -f
-
-LIBFT_DIR = ./libft
-LIBFT_NAME = libft.a
-LIBFT = $(addprefix $(LIBFT_DIR)/, $(LIBFT_NAME))
 
 SERVER_FILES = server \
 	       	utils
