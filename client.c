@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incs/minitalk.h"
+#include "minitalk.h"
 
 void	ft_send_sig(int pid, char c)
 {
@@ -39,7 +39,7 @@ void	ft_transmit(int pid, char *str)
 	}
 }
 
-int	main(int ac, char av)
+int	main(int ac, char **av)
 {
 	int	pid;
 
@@ -47,7 +47,7 @@ int	main(int ac, char av)
 	{
 		pid = ft_atoi(av[1]);
 		if (pid <= 0)
-			err_msg_pid{};
+			error_msg_pid();
 		ft_transmit(pid, av[2]);
 	}
 	else

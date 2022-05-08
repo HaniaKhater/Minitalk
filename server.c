@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incs/minitalk.h"
+#include "minitalk.h"
+#include <stdio.h>
 
 void	assemble_char(int sig)
 {
@@ -23,7 +24,7 @@ void	assemble_char(int sig)
 		c++;
 	if (i == 8)
 	{
-		ft_putchar_fd(c, 1);
+		ft_putchar(c);
 		i = 0;
 		c = 0x0;
 	}
@@ -34,9 +35,10 @@ int	main (void)
 	int	pid;
 
 	pid = getpid();
-	if (pid < 100 && pid <= 32768)
+	if (pid > 100)
 	{
-		ft_printf("PID: %d\n", pid);
+		ft_putnbr(pid);
+		ft_putchar('\n');
 		while (1)
 		{
 			signal(SIGUSR1, assemble_char);

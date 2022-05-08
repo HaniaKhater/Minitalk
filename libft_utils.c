@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minitalk.h"
+
 int	ft_atoi(const char *str)
 {
 	int	i;
@@ -37,7 +39,12 @@ int	ft_atoi(const char *str)
 	return (nb);
 }
 
-void	ft_putstr_fd(char *s, int fd)
+void	ft_putchar(char c)
+{
+	write(1, &c, 1);
+}
+
+void	ft_putstr(char *s)
 {
 	int	len;
 
@@ -45,5 +52,23 @@ void	ft_putstr_fd(char *s, int fd)
 	while (s[len])
 		len++;
 	if (s)
-		write(fd, s, len);
+		write(1, s, len);
+}
+
+void	ft_putnbr(int nb)
+{
+	if (nb == -2147483648)
+		ft_putstr("-2147483648");
+	if (nb < 0)
+	{
+		ft_putchar('-');
+		nb *= -1;
+	}
+	if (nb > 9)
+	{
+		ft_putnbr(nb / 10);
+		ft_putnbr(nb % 10);
+	}
+	if (nb <= 9)
+		ft_putchar(nb + 48);
 }

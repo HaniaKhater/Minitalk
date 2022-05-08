@@ -15,12 +15,11 @@
 
 #include <signal.h>
 #include <unistd.h>
-#include "../libft/inc/libft.h"
-#include "../libft/inc/ft_printf.h"
 
 void	error_msg_pid(void);
 void	error_msg_arg(void);
 int     ft_atoi(const char *str);
-void    ft_putstr_fd(char *s, int fd);
-
+void	ft_putchar(char c);
+void    ft_putstr(char *s);
+void	ft_putnbr(int nb);
 #endif
