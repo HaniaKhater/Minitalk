@@ -2,48 +2,32 @@ CC = cc
 CFLAGS = -Wall -Werror -Wextra
 RM = rm -rf
 
-SERVER_NAME = server
-CLIENT_NAME = client
+SERVER = server
+CLIENT = client
 
-SERVER_FILES = server \
-	       	utils
+SHARED_FILES = messages.c libft_utils.c
+SRC_SERVER = $(SHARED_FILES) server.c
+SRC_CLIENT = $(SHARED_FILES) client.c
+S_OBJ = $(SRC_SERVER:%.c=%.o)
+C_OBJ = $(SRC_CLIENT:%.c=%.o)
 
-CLIENT_FILES = client \
-		utils
+all: $(SERVER) $(CLIENT)
 
-INCS_DIR = ./incs
-
-SRCS_DIR = ./srcs
-
-SERVER_SRCS = $(addprefix $(SRCS_DIR)/, $(addsuffix .c, $(SERVER_FILES)))
-SERVER_OBJS = $(addprefix $(SRCS_DIR)/, $(addsuffix .o, $(SERVER_FILES)))
-
-CLIENT_SRCS = $(addprefix $(SRCS_DIR)/, $(addsuffix .c, $(CLIENT_FILES)))
-CLIENT_OBJS = $(addprefix $(SRCS_DIR)/, $(addsuffix .o, $(CLIENT_FILES)))
-
-.c.o: $(SERVER_SRCS) $(CLIENT_SRCS) $(INCS_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@ -I$(INCS_DIR)
-
-all: $(LIBFT_NAME) $(SERVER_NAME) $(CLIENT_NAME)
-
-$(LIBFT_NAME):
-	make -C $(LIBFT_DIR)
-
-$(SERVER_NAME): $(SERVER_SRCS) $(LIBFT)
+$(SERVER): $(S_OBJ)
 	$(CC) $(CFLAGS) $^ -o $@
 
-$(CLIENT_NAME): $(CLIENT_SRCS) $(LIBFT)
+$(CLIENT): $(C_OBJ)
 	$(CC) $(CFLAGS) $^ -o $@
+
+%.o : %.c minitalk.h
+	$(CC) $(CFLAGS) $^ -c
 
 clean:
-	make clean -C $(LIBFT_DIR)
-	$(RM) $(SERVER_OBJS)
-	$(RM) $(CLIENT_OBJS)
+	$(RM) *.o *.gch
 
 fclean: clean
-	make fclean -C $(LIBFT_DIR)
-	$(RM) $(SERVER_NAME)
-	$(RM) $(CLIENT_NAME)
+	$(RM) $(SERVER)
+	$(RM) $(CLIENT)
 
 re: fclean all
 
