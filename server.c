@@ -6,7 +6,7 @@
 /*   By: hkhater <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 01:29:48 by hkhater           #+#    #+#             */
-/*   Updated: 2022/04/23 01:29:52 by hkhater          ###   ########.fr       */
+/*   Updated: 2022/05/12 23:19:13 by hkhater          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	assemble_char(int sig)
 	}
 }
 
-int	main (void)
+int	main(void)
 {
 	int	pid;
 
