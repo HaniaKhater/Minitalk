@@ -6,12 +6,11 @@
 /*   By: hkhater <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 01:29:48 by hkhater           #+#    #+#             */
-/*   Updated: 2022/05/20 02:08:07 by hkhater          ###   ########.fr       */
+/*   Updated: 2022/05/20 04:48:15 by hkhater          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
-#include <stdio.h>
 
 char	*g_str;
 
@@ -22,27 +21,24 @@ void	print_free(void)
 	g_str = NULL;
 }
 
-char	*ft_addchar(char *s1, char c)
+void	ft_addchar(char c)
 {
-	char		*s2;
-	int			i;
+	char	*tmp;
+	int		i;
 
 	i = 0;
-	if (!s1)
-		return (0);
-	s2 = malloc(sizeof(char) * (ft_strlen(s1) + 2));
-	if (!s2)
-		return (0);
-	while (s1[i])
+	tmp = ft_strdup(g_str);
+	free(g_str);
+	g_str = malloc(sizeof(char) * (ft_strlen(tmp) + 2));
+	while (tmp[i])
 	{
-		s2[i] = s1[i];
+		g_str[i] = tmp[i];
 		i++;
 	}
-	s2[i] = c;
+	g_str[i] = c;
 	i++;
-	s2[i] = '\0';
-	free(s1);
-	return (s2);
+	g_str[i] = '\0';
+	free(tmp);
 }
 
 void	assemble_str(char c)
@@ -52,13 +48,14 @@ void	assemble_str(char c)
 		print_free();
 		return ;
 	}
-	if (g_str == 0)
+	if (g_str == NULL)
 	{
+		malloc(sizeof(char) * 2);
 		g_str[0] = c;
 		g_str[1] = '\0';
 		return ;
 	}
-	g_str = ft_addchar(g_str, c);
+	ft_addchar(c);
 }
 
 void	assemble_char(int sig)
@@ -82,19 +79,18 @@ int	main(void)
 {
 	int	pid;
 
-	g_str = malloc(sizeof(char) * 1);
-	g_str[0] = '\0';
 	pid = getpid();
+	g_str = NULL;
 	if (pid > 100)
 	{
 		ft_putnbr(pid);
 		ft_putchar('\n');
+		g_str = malloc(sizeof(char) * 1);
+		g_str[0] = '\0';
+		signal(SIGUSR1, assemble_char);
+		signal(SIGUSR2, assemble_char);
 		while (1)
-		{
-			signal(SIGUSR1, assemble_char);
-			signal(SIGUSR2, assemble_char);
 			pause();
-		}
 	}
 	else
 		error_msg_pid();
