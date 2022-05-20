@@ -6,7 +6,7 @@
 /*   By: hkhater <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 01:29:04 by hkhater           #+#    #+#             */
-/*   Updated: 2022/04/23 01:38:26 by hkhater          ###   ########.fr       */
+/*   Updated: 2022/05/20 01:58:01 by hkhater          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,20 +39,14 @@ int	ft_atoi(const char *str)
 	return (nb);
 }
 
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
-
-void	ft_putstr(char *s)
+int		ft_strlen(char *s)
 {
 	int	len;
 
 	len = 0;
 	while (s[len])
 		len++;
-	if (s)
-		write(1, s, len);
+	return (len);
 }
 
 void	ft_putnbr(int nb)
@@ -72,3 +66,4 @@ void	ft_putnbr(int nb)
 	if (nb <= 9)
 		ft_putchar(nb + 48);
 }
+
